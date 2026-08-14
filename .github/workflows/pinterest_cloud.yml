@@ -1,0 +1,62 @@
+name: Pinterest Cloud Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      action_type:
+        description: 'Action to perform'
+        required: false
+        default: 'create_accounts'
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Google Chrome, Xvfb, and Rclone
+        run: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable xvfb rclone
+
+      - name: Configure Rclone for Engine Pull
+        env:
+          RCLONE_CONFIG_GDRIVE_TYPE: drive
+          RCLONE_CONFIG_GDRIVE_SCOPE: drive
+          RCLONE_CONFIG_GDRIVE_TOKEN: ${{ secrets.G_DRIVE_TOKEN_ENGINE }}
+        run: |
+          mkdir -p ~/.config/rclone
+          echo "[gdrive]" > ~/.config/rclone/rclone.conf
+          echo "type = drive" >> ~/.config/rclone/rclone.conf
+          echo "scope = drive" >> ~/.config/rclone/rclone.conf
+          echo "token = $RCLONE_CONFIG_GDRIVE_TOKEN" >> ~/.config/rclone/rclone.conf
+
+      - name: Pull Pinterest Engine from G-Drive
+        run: |
+          echo "[*] Pulling Python Engine from Google Drive..."
+          # Update the source path below to match exactly where you place the Pinterest folder on your G-Drive
+          rclone copy "gdrive:Colab_AutoVideoCreator/Pinterest" ./engine -v
+
+      - name: Install Python Dependencies
+        run: |
+          cd engine
+          pip install -r requirements.txt
+          playwright install
+
+      - name: Execute Pipeline (Zero-Fingerprint Headed)
+        env:
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          NVIDIA_API_KEY_2: ${{ secrets.NVIDIA_API_KEY_2 }}
+        run: |
+          cd engine
+          echo "[*] Booting pipeline via Xvfb headed Chrome..."
+          xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" python main_local_test.py

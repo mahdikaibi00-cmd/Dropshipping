@@ -1,0 +1,15 @@
+# Ignore all Python engine code
+*.py
+__pycache__/
+*.pyc
+
+# Ignore all dynamic JSON data (logs, accounts, configs)
+*.json
+
+# Ignore virtual environments
+venv/
+env/
+.env
+
+# Protect specific folders
+tokens/
