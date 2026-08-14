@@ -21,24 +21,34 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install Google Chrome, Xvfb, and Rclone
+      - name: Install Google Chrome, Xvfb, Rclone, and JQ
         run: |
           wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
           sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable xvfb rclone
+          sudo apt-get install -y google-chrome-stable xvfb rclone jq
 
       - name: Configure Rclone for Engine Pull
         env:
-          RCLONE_CONFIG_GDRIVE_TYPE: drive
-          RCLONE_CONFIG_GDRIVE_SCOPE: drive
-          RCLONE_CONFIG_GDRIVE_TOKEN: ${{ secrets.G_DRIVE_TOKEN }}
+          DATA_TOKEN_RAW: ${{ secrets.G_DRIVE_TOKEN }}
         run: |
           mkdir -p ~/.config/rclone
-          echo "[gdrive]" > ~/.config/rclone/rclone.conf
-          echo "type = drive" >> ~/.config/rclone/rclone.conf
-          echo "scope = drive" >> ~/.config/rclone/rclone.conf
-          echo "token = $RCLONE_CONFIG_GDRIVE_TOKEN" >> ~/.config/rclone/rclone.conf
+          
+          D_ACCESS=$(echo "$DATA_TOKEN_RAW" | jq -r '.token')
+          D_REFRESH=$(echo "$DATA_TOKEN_RAW" | jq -r '.refresh_token')
+          D_EXPIRY=$(echo "$DATA_TOKEN_RAW" | jq -r '.expiry')
+          CLIENT_ID=$(echo "$DATA_TOKEN_RAW" | jq -r '.client_id')
+          CLIENT_SECRET=$(echo "$DATA_TOKEN_RAW" | jq -r '.client_secret')
+          DATA_TOKEN="{\"access_token\":\"$D_ACCESS\",\"token_type\":\"Bearer\",\"refresh_token\":\"$D_REFRESH\",\"expiry\":\"$D_EXPIRY\"}"
+          
+          cat << EOF > ~/.config/rclone/rclone.conf
+          [gdrive]
+          type = drive
+          client_id = $CLIENT_ID
+          client_secret = $CLIENT_SECRET
+          scope = drive
+          token = $DATA_TOKEN
+          EOF
 
       - name: Pull Pinterest Engine from G-Drive
         run: |
