@@ -30,23 +30,29 @@ jobs:
 
       - name: Configure Rclone for Engine Pull
         env:
-          DATA_TOKEN_RAW: ${{ secrets.G_DRIVE_TOKEN }}
+          G_DRIVE_TOKEN_RAW: ${{ secrets.G_DRIVE_TOKEN }}
         run: |
-          mkdir -p ~/.config/rclone
-          
-          D_ACCESS=$(echo "$DATA_TOKEN_RAW" | jq -r '.token')
-          D_REFRESH=$(echo "$DATA_TOKEN_RAW" | jq -r '.refresh_token')
-          D_EXPIRY=$(echo "$DATA_TOKEN_RAW" | jq -r '.expiry')
-          CLIENT_ID=$(echo "$DATA_TOKEN_RAW" | jq -r '.client_id')
-          CLIENT_SECRET=$(echo "$DATA_TOKEN_RAW" | jq -r '.client_secret')
-          DATA_TOKEN="{\"access_token\":\"$D_ACCESS\",\"token_type\":\"Bearer\",\"refresh_token\":\"$D_REFRESH\",\"expiry\":\"$D_EXPIRY\"}"
-          
-          echo "[gdrive]" > ~/.config/rclone/rclone.conf
-          echo "type = drive" >> ~/.config/rclone/rclone.conf
-          echo "client_id = $CLIENT_ID" >> ~/.config/rclone/rclone.conf
-          echo "client_secret = $CLIENT_SECRET" >> ~/.config/rclone/rclone.conf
-          echo "scope = drive" >> ~/.config/rclone/rclone.conf
-          echo "token = $DATA_TOKEN" >> ~/.config/rclone/rclone.conf
+          python -c '
+          import os, json
+          os.makedirs(os.path.expanduser("~/.config/rclone"), exist_ok=True)
+          d = json.loads(os.environ["G_DRIVE_TOKEN_RAW"])
+          token_obj = {
+              "access_token": d.get("token", ""),
+              "token_type": "Bearer",
+              "refresh_token": d.get("refresh_token", ""),
+              "expiry": d.get("expiry", "")
+          }
+          conf = f"""[gdrive]
+          type = drive
+          client_id = {d.get("client_id", "")}
+          client_secret = {d.get("client_secret", "")}
+          scope = drive
+          token = {json.dumps(token_obj)}
+          """
+          with open(os.path.expanduser("~/.config/rclone/rclone.conf"), "w") as f:
+              for line in conf.strip().split("\n"):
+                  f.write(line.strip() + "\n")
+          '
 
       - name: Pull Pinterest Engine from G-Drive
         run: |
