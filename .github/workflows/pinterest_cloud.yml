@@ -41,14 +41,12 @@ jobs:
           CLIENT_SECRET=$(echo "$DATA_TOKEN_RAW" | jq -r '.client_secret')
           DATA_TOKEN="{\"access_token\":\"$D_ACCESS\",\"token_type\":\"Bearer\",\"refresh_token\":\"$D_REFRESH\",\"expiry\":\"$D_EXPIRY\"}"
           
-          cat << EOF > ~/.config/rclone/rclone.conf
-          [gdrive]
-          type = drive
-          client_id = $CLIENT_ID
-          client_secret = $CLIENT_SECRET
-          scope = drive
-          token = $DATA_TOKEN
-          EOF
+          echo "[gdrive]" > ~/.config/rclone/rclone.conf
+          echo "type = drive" >> ~/.config/rclone/rclone.conf
+          echo "client_id = $CLIENT_ID" >> ~/.config/rclone/rclone.conf
+          echo "client_secret = $CLIENT_SECRET" >> ~/.config/rclone/rclone.conf
+          echo "scope = drive" >> ~/.config/rclone/rclone.conf
+          echo "token = $DATA_TOKEN" >> ~/.config/rclone/rclone.conf
 
       - name: Pull Pinterest Engine from G-Drive
         run: |
