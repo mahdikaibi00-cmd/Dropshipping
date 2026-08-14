@@ -1,0 +1,42 @@
+
+--- URL: https://api.gleap.io/sessions ---
+{"gleapId": "f030b22f-d70c-458a-9ea8-c4605dbc5dd4", "gleapHash": "7c3bcaa72dc5f8ca7189de28309ba61aafc831f94bf3da0084824e4ead35265e", "value": 0, "lang": "en-us", "id": "6a7d8a682b4c2b2a8f007fab"}
+
+--- URL: https://umami-production-8f22.up.railway.app/api/send ---
+{"cache": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3ZWJzaXRlSWQiOiI0OGY1Yjc0ZC1mZTUyLTRiMGYtODExYy01MzU2ZDZlOWIyMGUiLCJzZXNzaW9uSWQiOiIzZGMzMWQ3My1lNDY4LTVhZDAtYmI5My02MDVlMWJmMjBkY2EiLCJ2aXNpdElkIjoiNGI3OWE0ZmYtMDU5Zi01Yzc2LTgwZjMtNWYzYjRlMTEzOGU1IiwiaWF0IjoxNzg2NjEyMzI4fQ.fQ6vMXP3rS2QK1i1WjnxTKf9fzuj11XrlcCCrFFOXoY", "sessionId": "3dc31d73-e468-5ad0-bb93-605e1bf20dca", "visitId": "4b79a4ff-059f-5c76-80f3-5f3b4e1138e5"}
+
+--- URL: https://app.minea.com/rpc/geo/getCountryCode ---
+{"json": "DZ"}
+
+--- URL: https://app.minea.com/rpc/productChangelog/getPublishedIds ---
+{"json": [3, 4]}
+
+--- URL: https://app.minea.com/rpc/affiliation/getCurrentAffiliateNote ---
+{"json": null}
+
+--- URL: https://app.minea.com/api/auto-complete-suggestions?value=&type=ads_products&locales=en%2Cen ---
+[{"value": "stylish cardholder wallet", "mineaSelection": null}, {"value": "compact umbrella for travel", "mineaSelection": null}, {"value": "trendy phone case designs", "mineaSelection": null}, {"value": "creative wall stickers", "mineaSelection": null}, {"value": "luxury bed sheets set", "mineaSelection": null}, {"value": "smartphone charging station", "mineaSelection": null}, {"value": "portable massager for home use", "mineaSelection": null}, {"value": "unique lamp for home decor", "mineaSelection": null}, {"value": "free shipping baby clothes", "mineaSelection": null}, {"value": "kids stylish water bottle", "mineaSelection": null}]
+
+--- URL: https://api.gleap.io/config/uO2OiqAvpBHFEIBleI0aebc6rk5Pngym?lang=en-us ---
+{"flowConfig": {"newsMenuLabel": "News", "checklistMenuLabel": "Tasks", "featureRequestsMenuLabel": "Roadmap", "allConversationsMenuLabel": "Messages", "knowledgeBaseMenuLabel": "Help", "welcomeText": "How can we help you today?", "replyTime": "We usually reply within a few minutes", "color": "#e85f2e", "bgType": "gradient", "animateBG": true, "vision": true, "bgBlur": true, "sendOnEnter": true, "backgroundColor": "#FFFFFF", "headerColor": "#e85f2e", "headerColor2": "#e04f1b", "headerColor3": "#ffa929", "buttonColor": "#e85f2e", "borderRadius": 20, "buttonX": 20, "buttonY": 20, "operatorAvatarImage": "", "operatorName": "Kai", "logo": "https://staticfiles.gleap.io/gfeedback_widgets/uBTNq65OguSDa3TkJdMPq037nhnFQnnFo1TzgnZ1zM4V7t3CYeielfFsz8d2ncWRBUsvSrZ9Y47.png", "buttonLogo": "", "customCSS": "", "hideFeatureRequests": true, "hideNews": false, "hideAllConversations": false, "hideKnowledgeBase": true, "openingTimes": [{"day": "Weekdays", "openingTime": "08:00", "closingTime": "17:00"}],
+
+--- URL: https://api.gleap.io/config/uO2OiqAvpBHFEIBleI0aebc6rk5Pngym/tooltips ---
+[]
+
+--- URL: https://api.gleap.io/sessions/identify ---
+{"gleapId": "8e3673a9-8a2d-419a-992b-f06e6bc32442", "gleapHash": "0d8680ffab9cb0c9c5f169286d9407659ee1baf986044fad9d8119581eab6123", "email": "Kaaibi@moakt.co", "userId": "55b6f82f-c6e8-45ec-8acb-36150ca0a7da", "value": 0, "plan": "lite", "lang": "en-us", "id": "68b83989203bd0433ae3d56d"}
+
+--- URL: https://app.minea.com/rpc/stripe/getAllProductPrices ---
+{"json": [{"productId": "premium_yearly", "amount": 832, "currencyCode": "USD", "currencySymbol": "$"}, {"productId": "premium_quarterly", "amount": 237, "currencyCode": "USD", "currencySymbol": "$"}, {"productId": "premium_monthly", "amount": 99, "currencyCode": "USD", "currencySymbol": "$"}, {"productId": "starter_yearly", "amount": 412, "currencyCode": "USD", "currencySymbol": "$"}, {"productId": "starter_quarterly", "amount": 117, "currencyCode": "USD", "currencySymbol": "$"}, {"productId": "starter_monthly", "amount": 49, "currencyCode": "USD", "currencySymbol": "$"}, {"productId": "10k_credits", "amount": 29, "currencyCode": "USD", "currencySymbol": "$"}, {"productId": "10k_credits", "amount": 29, "currencyCode": "USD", "currencySymbol": "$"}, {"productId": "orange-box", "amount": 19, "currencyCode": "USD", "currencySymbol": "$"}, {"productId": "coaching-deposit", "amount": 100, "currencyCode": "USD", "currencySymbol": "$"}, {"productId": "pause_monthly", "amount": 19, "currencyC
+
+--- URL: https://api.gleap.io/config/uO2OiqAvpBHFEIBleI0aebc6rk5Pngym/tooltips ---
+[]
+
+--- URL: https://y5ec7qy3bzbkxm6udp4u3o3lee.appsync-api.eu-west-1.amazonaws.com/graphql ---
+{"data": {"getUser": {"id": "55b6f82f-c6e8-45ec-8acb-36150ca0a7da", "owner": "55b6f82f-c6e8-45ec-8acb-36150ca0a7da", "email": "Kaaibi@moakt.co", "role": null, "plan": "lite", "firstName": "Kaaibio", "lastName": null, "photo": "https://avataaars.io/?topType=ShortHairShortRound&hairColor=Platinum&accessoriesType=Prescription02&facialHairType=BeardMajestic&facialHairColor=Red&clotheType=BlazerShirt&clotheColor=Blue02&eyeType=Wink&eyebrowType=Default&mouthType=Default&skinColor=Light", "country": "DZ", "address": null, "vat": null, "zip": null, "state": null, "city": null, "planPeriodStart": null, "planPeriodEnd": null, "credits": 130.0, "totalCredits": 470.0, "creditsRefillAt": null, "stripeCustomerId": "cus_Qk2hOuOd27IL4g", "stripeOrigin": "minea", "isAffiliate": null, "affiliateId": null, "appliedOffers": null, "academyCompletedIds": null, "referralCoupon": "MINExKAAIBIO810656", "isEmailVerified": true, "firstPromoterAuthToken": null, "affiliateValidation": null, "firstPromoterRef": nul
+
+--- URL: https://umami-production-8f22.up.railway.app/api/send ---
+{"cache": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3ZWJzaXRlSWQiOiI0OGY1Yjc0ZC1mZTUyLTRiMGYtODExYy01MzU2ZDZlOWIyMGUiLCJzZXNzaW9uSWQiOiIzZGMzMWQ3My1lNDY4LTVhZDAtYmI5My02MDVlMWJmMjBkY2EiLCJ2aXNpdElkIjoiNGI3OWE0ZmYtMDU5Zi01Yzc2LTgwZjMtNWYzYjRlMTEzOGU1IiwiaWF0IjoxNzg2NjEyMzI4fQ.fQ6vMXP3rS2QK1i1WjnxTKf9fzuj11XrlcCCrFFOXoY", "sessionId": "3dc31d73-e468-5ad0-bb93-605e1bf20dca", "visitId": "4b79a4ff-059f-5c76-80f3-5f3b4e1138e5"}
+
+--- URL: https://api.gleap.io/sessions/ping ---
+{}
