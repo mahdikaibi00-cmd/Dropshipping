@@ -32,7 +32,7 @@ jobs:
         env:
           RCLONE_CONFIG_GDRIVE_TYPE: drive
           RCLONE_CONFIG_GDRIVE_SCOPE: drive
-          RCLONE_CONFIG_GDRIVE_TOKEN: ${{ secrets.G_DRIVE_TOKEN_ENGINE }}
+          RCLONE_CONFIG_GDRIVE_TOKEN: ${{ secrets.G_DRIVE_TOKEN }}
         run: |
           mkdir -p ~/.config/rclone
           echo "[gdrive]" > ~/.config/rclone/rclone.conf
@@ -49,13 +49,14 @@ jobs:
       - name: Install Python Dependencies
         run: |
           cd engine
-          pip install -r requirements.txt
-          playwright install
+          pip install -r requirements.txt undetected-chromedriver selenium
 
       - name: Execute Pipeline (Zero-Fingerprint Headed)
         env:
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
           NVIDIA_API_KEY_2: ${{ secrets.NVIDIA_API_KEY_2 }}
+          GMAIL_MASTER_ADDRESS: ${{ secrets.GMAIL_MASTER_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: |
           cd engine
           echo "[*] Booting pipeline via Xvfb headed Chrome..."
