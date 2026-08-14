@@ -44,7 +44,7 @@ jobs:
         run: |
           echo "[*] Pulling Python Engine from Google Drive..."
           # Update the source path below to match exactly where you place the Pinterest folder on your G-Drive
-          rclone copy "gdrive:Colab_AutoVideoCreator/Pinterest" ./engine -v
+          rclone copy "gdrive:Dropshipping/Pinterest" ./engine -v
 
       - name: Install Python Dependencies
         run: |
