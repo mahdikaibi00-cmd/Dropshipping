@@ -74,4 +74,4 @@ jobs:
         run: |
           cd engine
           echo "[*] Booting pipeline via Xvfb headed Chrome..."
-          xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" python main_local_test.py
+          xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" python -u main_local_test.py
