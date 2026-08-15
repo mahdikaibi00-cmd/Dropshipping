@@ -33,25 +33,41 @@ jobs:
           G_DRIVE_TOKEN_RAW: ${{ secrets.G_DRIVE_TOKEN }}
         run: |
           python -c '
-          import os, json
+          import os, json, urllib.request, urllib.parse
           os.makedirs(os.path.expanduser("~/.config/rclone"), exist_ok=True)
           d = json.loads(os.environ["G_DRIVE_TOKEN_RAW"])
+
+          client_id     = d.get("client_id", "")
+          client_secret = d.get("client_secret", "")
+          refresh_token = d.get("refresh_token", "")
+
+          # Always get a fresh access token using the refresh_token
+          print("[*] Refreshing Google access token...")
+          payload = urllib.parse.urlencode({
+              "client_id":     client_id,
+              "client_secret": client_secret,
+              "refresh_token": refresh_token,
+              "grant_type":    "refresh_token"
+          }).encode()
+          req = urllib.request.Request(
+              "https://oauth2.googleapis.com/token",
+              data=payload,
+              headers={"Content-Type": "application/x-www-form-urlencoded"}
+          )
+          resp = json.loads(urllib.request.urlopen(req).read())
+          fresh_access_token = resp["access_token"]
+          print("[+] Token refreshed successfully.")
+
           token_obj = {
-              "access_token": d.get("token", ""),
-              "token_type": "Bearer",
-              "refresh_token": d.get("refresh_token", ""),
-              "expiry": d.get("expiry", "")
+              "access_token":  fresh_access_token,
+              "token_type":    "Bearer",
+              "refresh_token": refresh_token,
+              "expiry":        "2030-01-01T00:00:00Z"
           }
-          conf = f"""[gdrive]
-          type = drive
-          client_id = {d.get("client_id", "")}
-          client_secret = {d.get("client_secret", "")}
-          scope = drive
-          token = {json.dumps(token_obj)}
-          """
+          conf = "[gdrive]\ntype = drive\nclient_id = " + client_id + "\nclient_secret = " + client_secret + "\nscope = drive\ntoken = " + json.dumps(token_obj) + "\n"
           with open(os.path.expanduser("~/.config/rclone/rclone.conf"), "w") as f:
-              for line in conf.strip().split("\n"):
-                  f.write(line.strip() + "\n")
+              f.write(conf)
+          print("[+] rclone.conf written successfully.")
           '
 
       - name: Pull Pinterest Engine from G-Drive
